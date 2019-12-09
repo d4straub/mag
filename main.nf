@@ -13,7 +13,6 @@ Daniel Straub <d4straub@gmail.com>
 ----------------------------------------------------------------------------------------
 */
 
-
 def helpMessage() {
     // TODO nf-core: Add to this help message with new command line parameters
     log.info nfcoreHeader()
