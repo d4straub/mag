@@ -898,6 +898,7 @@ process metabat {
     set val(assembler), val(sample), file("MetaBAT2/*") into metabat_bins mode flatten
     set val(assembler), val(sample), file("MetaBAT2/*") into metabat_bins_for_cat
     set val(assembler), val(sample), file("MetaBAT2/*") into metabat_bins_quast_bins
+    file("${assembler}-${assembly}-depth.txt.gz")
 
     when:
     !params.skip_binning
@@ -906,6 +907,7 @@ process metabat {
     def name = "${assembler}-${sample}"
     """
     jgi_summarize_bam_contig_depths --outputDepth depth.txt ${bam}
+    gzip -c depth.txt > "${assembler}-${assembly}-depth.txt.gz"
     metabat2 -t "${task.cpus}" -i "${assembly}" -a depth.txt -o "MetaBAT2/${name}" -m ${min_size}
 
     #if bin folder is empty
